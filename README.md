@@ -35,3 +35,5 @@ git commit -m "message here to commit changes by using the previous command"
 git push: push the commited files to github.com ;)
 
 git pull: pull from github.com to your local folder ;)
+
+les dejo un video que me ayudo para entenderlo rapido: https://www.youtube.com/watch?v=0fKg7e37bQE
