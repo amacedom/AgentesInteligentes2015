@@ -5,6 +5,7 @@ public class Driver {
 		// TODO Auto-generated method stub
 		int[][] headbreaker = new int[3][3]; 
 		Estado s = new Estado(headbreaker);
+		
 	}
 
 }
