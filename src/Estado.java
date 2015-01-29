@@ -1,17 +1,21 @@
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashMap;
 
 public class Estado {
 	
 	Object info;
-	List<Estado> conexiones;
+	HashMap<Operador,Estado>enlaces;
 	boolean visitado;
+	
+	public Estado() {
+		this.info = null;
+		this.visitado = false;
+		this.enlaces = new HashMap<Operador,Estado>();
+	}
 	
 	public Estado (Object info){ 
 		this.info = info;
 		this.visitado = false;	
-		this.conexiones = new ArrayList<Estado>();
+		this.enlaces = new HashMap<Operador,Estado>();
 	}
 }
 
