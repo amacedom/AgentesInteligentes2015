@@ -6,11 +6,11 @@ public class Estado {
 	
 	Object info;
 	List<Estado> conexiones;
-	boolean visited;
+	boolean visitado;
 	
 	public Estado (Object info){ 
 		this.info = info;
-		this.visited = false;	
+		this.visitado = false;	
 		this.conexiones = new ArrayList<Estado>();
 	}
 }
