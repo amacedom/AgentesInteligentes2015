@@ -17,5 +17,9 @@ public class Estado {
 		this.visitado = false;	
 		this.enlaces = new HashMap<Operador,Estado>();
 	}
+	
+	public void agregarEnlace(Operador operador,Estado estadoDestino) {
+		this.enlaces.put(operador, estadoDestino);
+	}
 }
 
