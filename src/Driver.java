@@ -6,6 +6,7 @@ public class Driver {
 		int[][] headbreaker = new int[3][3]; 
 		Estado s = new Estado(headbreaker);
 		System.out.println("que pedo");
+		System.out.println("qesta es la version dos del programa");
 		
 	}
 
