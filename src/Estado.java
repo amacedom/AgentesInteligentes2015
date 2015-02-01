@@ -27,6 +27,10 @@ public class Estado {
 		this.enlaces.put(operador, estadoDestino);
 	}
 	
+	public void agregarNombre(int contador) {
+		this.nombre = "Estado" + Integer.toString(contador);
+	}
+	
 	// este metodo se usa para imprimir todas las propiedades del estado
 	public void verPropiedades() {
 		if(this.info instanceof int[][]) {
