@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -38,7 +39,8 @@ public class Generador {
 	//Regresa un estado; el mísmo si es un estado nuevo y el estado original si no es nuevo.
 	public boolean estadoRepetido(List<Estado> estados, Estado estado) {
 		for(Estado i: estados) {
-			if(i.visitado)
+			boolean equal = Arrays.deepEquals((Object[])estado.info,(Object[]) i.info);
+			if(equal)
 				return true;
 		}
 		
