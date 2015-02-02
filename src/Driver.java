@@ -10,10 +10,10 @@ public class Driver {
 		int[][] headbreaker = { {1,2},
 								{3,4}};
 		Estado s = new Estado(Integer.toString(contador),headbreaker);
-		/*List<Estado> estados = new Generador().crearEstados(s);
+		List<Estado> estados = new Generador().crearEstados(s);
 		for(Estado i: estados) {
 			i.verPropiedades();
-		}*/
+		}
 		
 		
 	}
