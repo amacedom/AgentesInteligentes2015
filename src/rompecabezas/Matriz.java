@@ -1,3 +1,4 @@
+package rompecabezas;
 
 public class Matriz {
 
