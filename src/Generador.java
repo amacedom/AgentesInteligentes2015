@@ -56,6 +56,8 @@ public class Generador {
 			switch(movimiento) {
 				
 				case ARRIBA:	System.out.println("Nos movemos hacia arriba");
+								int [][] transicion = new Matriz().moverArriba((int[][])actual.info);
+									
 								break;
 				
 				case DERECHA:	System.out.println("Nos movemos hacia la derecha");
@@ -73,15 +75,6 @@ public class Generador {
 		
 		
 		return estadoNuevo;
-	}
-	
-	
-	//Regresa verdadero o falso si el estado es valido o inválido
-	public boolean estadoValido(Estado actual, Operador movimiento) {
-		
-		
-			
-		return false;
 	}
 	
 	//Regresa un estado; el mísmo si es un estado nuevo y el estado original si no es nuevo.
