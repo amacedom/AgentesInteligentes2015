@@ -28,8 +28,10 @@ public class Generador {
 					System.out.println("ya no podemos movernos hacia " + movimiento);
 				}
 				else { // si no es nulo, entonces es un estado valido, pero no sabemos si es repetido
+					System.out.println("se genero un estado valido");
 					repetido = estadoRepetido(estados,nuevoEnlace);
 					if(!repetido) { // no esta repetido, por lo tanto lo agregamos a nuestra lista de estados
+						System.out.println("No esta repetido y se agregara a la lista de estados");
 						actual.enlaces.put(movimiento, nuevoEnlace);
 						estados.add(nuevoEnlace);
 						nuevoEnlace.agregarNombre(contador);
@@ -51,28 +53,41 @@ public class Generador {
 	public Estado generarEnlace( Estado actual, Operador movimiento) {
 		Estado estadoNuevo = null;
 		boolean matriz = (actual.info instanceof int[][]);
+		int [][] transicion = null; // la info del nuevo estado
 		
 		if(matriz) {
 			switch(movimiento) {
 				
 				case ARRIBA:	System.out.println("Nos movemos hacia arriba");
-								int [][] transicion = new Matriz().moverArriba((int[][])actual.info);
+								transicion = new Matriz().moverArriba((int[][])actual.info);
 									
 								break;
 				
 				case DERECHA:	System.out.println("Nos movemos hacia la derecha");
+								transicion = new Matriz().moverDerecha((int[][])actual.info);
+								
 								break;
 								
 				case ABAJO: 	System.out.println("Nos movemos hacia abajo");
+								transicion = new Matriz().moverAbajo((int[][])actual.info);
+								
 								break;
 								
 				case IZQUIERDA: System.out.println("Nos movemos hacia la izquierda");
+								transicion = new Matriz().moverIzquierda((int[][])actual.info);
+								
 								break;
 			
 			}
 			
+			if(transicion == null) {
+				System.out.println("No pudimos generar ninguna transicion");
+			}
+			else {
+				estadoNuevo = new Estado(transicion);
+			}
+			
 		}
-		
 		
 		return estadoNuevo;
 	}

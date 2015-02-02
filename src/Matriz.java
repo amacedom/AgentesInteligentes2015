@@ -2,7 +2,7 @@
 public class Matriz {
 
 	public int[][] moverArriba (int[][]actual) {
-		int [][] nueva = actual;
+		int [][] nueva = copiarMatriz(actual);
 		int filas = actual.length;
 		int colum = actual[0].length;
 		int valor; // cuando encontremos cero
@@ -15,9 +15,11 @@ public class Matriz {
 						int temp = nueva[i-1][j];
 						nueva[i-1][j] = 0;
 						nueva[i][j] = temp;
+						return nueva;
 						
 					} catch (ArrayIndexOutOfBoundsException e){
 						System.out.println("la operacion no es posible, se sale de la matriz");
+						nueva = null;
 					}
 				}
 			}
@@ -27,7 +29,7 @@ public class Matriz {
 	}
 	
 	public int[][] moverDerecha (int[][]actual) {
-		int [][] nueva = actual;
+		int [][] nueva = copiarMatriz(actual);
 		int filas = actual.length;
 		int colum = actual[0].length;
 		int valor; // cuando encontremos cero
@@ -40,9 +42,11 @@ public class Matriz {
 						int temp = nueva[i][j+1];
 						nueva[i][j+1] = 0;
 						nueva[i][j] = temp;
+						return nueva;
 						
 					} catch (ArrayIndexOutOfBoundsException e){
 						System.out.println("la operacion no es posible, se sale de la matriz");
+						nueva = null;
 					}
 				}
 			}
@@ -52,7 +56,7 @@ public class Matriz {
 	}
 	
 	public int[][] moverAbajo (int[][]actual) {
-		int [][] nueva = actual;
+		int [][] nueva = copiarMatriz(actual);
 		int filas = actual.length;
 		int colum = actual[0].length;
 		int valor; // cuando encontremos cero
@@ -65,9 +69,11 @@ public class Matriz {
 						int temp = nueva[i+1][j];
 						nueva[i+1][j] = 0;
 						nueva[i][j] = temp;
+						return nueva;
 						
 					} catch (ArrayIndexOutOfBoundsException e){
 						System.out.println("la operacion no es posible, se sale de la matriz");
+						nueva = null;
 					}
 				}
 			}
@@ -77,7 +83,7 @@ public class Matriz {
 	}
 	
 	public int[][] moverIzquierda (int[][]actual) {
-		int [][] nueva = actual;
+		int [][] nueva = copiarMatriz(actual);
 		int filas = actual.length;
 		int colum = actual[0].length;
 		int valor; // cuando encontremos cero
@@ -90,14 +96,29 @@ public class Matriz {
 						int temp = nueva[i][j-1];
 						nueva[i][j-1] = 0;
 						nueva[i][j] = temp;
+						return nueva;
 						
 					} catch (ArrayIndexOutOfBoundsException e){
 						System.out.println("la operacion no es posible, se sale de la matriz");
+						nueva = null;
 					}
 				}
 			}
 		}
 		
 		return nueva;
+	}
+	
+	public int[][] copiarMatriz(int[][] fuente) {
+		int filas = fuente.length;
+		int colum = fuente[0].length;
+		int[][]destino = new int[filas][colum];
+		
+		for(int i = 0; i < filas; i++)
+			for(int j = 0; j < colum; j++){
+				destino[i][j] = fuente[i][j];
+			}
+		
+		return destino;
 	}
 }

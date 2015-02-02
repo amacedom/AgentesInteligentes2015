@@ -16,6 +16,13 @@ public class Estado {
 		this.enlaces = new HashMap<Operador,Estado>();
 	}
 	
+	public Estado (Object info){
+		this.nombre = null;
+		this.info = info;
+		this.visitado = false;	
+		this.enlaces = new HashMap<Operador,Estado>();
+	}
+	
 	public Estado (String nombre,Object info){
 		this.nombre = "Estado " + nombre;
 		this.info = info;
@@ -49,7 +56,7 @@ public class Estado {
 	// muestra los enlaces del estado, si no tiene no imprime nada
 	public void verEnlaces() {
 		for(Map.Entry <Operador,Estado> o: this.enlaces.entrySet()) {
-			System.out.println("Con: " + o.getKey() +  " hacia " + o.getValue());
+			System.out.println("Con: " + o.getKey() +  " hacia " + o.getValue().nombre);
 		}
 	}
 	
