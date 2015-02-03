@@ -55,6 +55,10 @@ public class Estado {
 		return this.visitado;
 	}
 	
+	public void setVisitado(boolean value) {
+		this.visitado = value;
+	}
+	
 	// este metodo se usa para imprimir todas las propiedades del estado
 	public void verPropiedades() {
 		if(this.info instanceof int[][]) {

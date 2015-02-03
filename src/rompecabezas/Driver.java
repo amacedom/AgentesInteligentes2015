@@ -9,29 +9,65 @@ public class Driver {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		long tStart,tDelta,tEnd;
+		double elapsedSeconds;
 		int contador = 1;
-		int[][] headbreaker = { {0,1},
-								{4,3}};
+		int[][] headbreaker = { {0,1,6},
+								{4,3,5}};
 		Estado s = new Estado(Integer.toString(contador),headbreaker);
-		long tStart = System.currentTimeMillis();
+		
+		tStart = System.currentTimeMillis();
+		
 		List<Estado> estados = new Generador().crearEstados(s);
 		for(Estado i: estados) {
 			i.verPropiedades();
 		}
 	
-		long tEnd = System.currentTimeMillis();
-		long tDelta = tEnd - tStart;
-		double elapsedSeconds = tDelta / 1000.0;
-		System.out.println("Elapsed Time: " + elapsedSeconds);
+		tEnd = System.currentTimeMillis();
+		tDelta = tEnd - tStart;
+		elapsedSeconds = tDelta / 1000.0;
+		
+		System.out.println("Termino generador de estados\nTiempo en segs: " + elapsedSeconds);
+		
+		//definir el estado a buscar
+		int[][] solucion = { {3,0,5},
+						     {1,6,4}};
+		Estado objetivo = new Estado(solucion);
+		boolean existe;
 		
 		System.out.println("busqueda por profundidad");
+		tStart = System.currentTimeMillis();
 		DFS bus1 = new DFS(estados);
 		bus1.buscarEstado(s);
-		BFS bus2 = new BFS(estados);
-		bus2.buscarEstado(s);
+		
+		existe = bus1.existeEstado(objetivo);
+		
+		if(existe)
+			System.out.println("El estado existe");
+		else
+			System.out.println("El estado no existe :(");
+		
+		tEnd = System.currentTimeMillis();
+		tDelta = tEnd - tStart;
+		elapsedSeconds = tDelta / 1000.0;
+		
+		System.out.println("Termino busqueda en produndidad\nTiempo en segs: " + elapsedSeconds);
 		
 		System.out.println("busqueda por amplitud");
+		tStart = System.currentTimeMillis();
+		BFS bus2 = new BFS(estados);
+		existe = bus2.existeEstado(objetivo);
 		
+		if(existe)
+			System.out.println("El estado existe");
+		else
+			System.out.println("El estado no existe :(");
+		
+		tEnd = System.currentTimeMillis();
+		tDelta = tEnd - tStart;
+		elapsedSeconds = tDelta / 1000.0;
+		
+		System.out.println("Termino busqueda en amplitud\nTiempo en segs: " + elapsedSeconds);
 	}
 
 }
