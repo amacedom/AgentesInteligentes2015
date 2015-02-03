@@ -39,6 +39,22 @@ public class Estado {
 		this.nombre = "Estado" + Integer.toString(contador);
 	}
 	
+	public HashMap<Operador,Estado> getEnlaces() {
+		return this.enlaces;
+	}
+	
+	public String getNombre() {
+		return this.nombre;
+	}
+	
+	public Object getInfo() {
+		return this.info;
+	}
+	
+	public boolean visitado() {
+		return this.visitado;
+	}
+	
 	// este metodo se usa para imprimir todas las propiedades del estado
 	public void verPropiedades() {
 		if(this.info instanceof int[][]) {

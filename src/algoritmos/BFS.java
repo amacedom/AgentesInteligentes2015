@@ -1,11 +1,14 @@
 package algoritmos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 import rompecabezas.Estado;
+import rompecabezas.Operador;
 
 public class BFS implements SearchMethods {
 	
@@ -27,6 +30,11 @@ public class BFS implements SearchMethods {
 		boolean cola_vacia = cola.isEmpty();
 		
 		while(!cola_vacia) {
+			Estado head = cola.poll();
+			HashMap<Operador,Estado> enlaces = head.getEnlaces();
+			for(Map.Entry <Operador,Estado> entry : enlaces.entrySet()) { //tenemos que agregar todos los estados a este nivel del arbol directamente a la cola
+				
+			}
 			
 			
 			
