@@ -3,10 +3,8 @@ package algoritmos;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Stack;
 
 import rompecabezas.Estado;
@@ -50,7 +48,7 @@ public class DFS implements SearchMethods{
 				return head;
 			}
 			else { //no son iguales, sigamos buscando
-				System.out.println("la solucion no esta en el estado actual -> " + head.getNombre());
+				//System.out.println("la solucion no esta en el estado actual -> " + head.getNombre());
 			}
 			head.setVisitado(true);
 			pila_vacia = pila.isEmpty();
@@ -85,7 +83,7 @@ public class DFS implements SearchMethods{
 				return true;
 			}
 			else { //no son iguales, sigamos buscando
-				System.out.println("la solucion no esta en el estado actual -> " + head.getNombre());
+				//System.out.println("la solucion no esta en el estado actual -> " + head.getNombre());
 			}
 			head.setVisitado(true);
 			pila_vacia = pila.isEmpty();

@@ -45,7 +45,7 @@ public class BFS implements SearchMethods {
 				return head;
 			}
 			else { //no son iguales, sigamos buscando
-				System.out.println("la solucion no esta en el estado actual -> " + head.getNombre());
+				//System.out.println("la solucion no esta en el estado actual -> " + head.getNombre());
 			}
 			
 			cola_vacia = cola.isEmpty();

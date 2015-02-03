@@ -35,10 +35,9 @@ public class Driver {
 		Estado objetivo = new Estado(solucion);
 		boolean existe;
 		
-		System.out.println("busqueda por profundidad");
+		System.out.println("\nbusqueda por profundidad");
 		tStart = System.currentTimeMillis();
 		DFS bus1 = new DFS(estados);
-		bus1.buscarEstado(s);
 		
 		existe = bus1.existeEstado(objetivo);
 		
@@ -53,7 +52,7 @@ public class Driver {
 		
 		System.out.println("Termino busqueda en produndidad\nTiempo en segs: " + elapsedSeconds);
 		
-		System.out.println("busqueda por amplitud");
+		System.out.println("\nbusqueda por amplitud");
 		tStart = System.currentTimeMillis();
 		BFS bus2 = new BFS(estados);
 		existe = bus2.existeEstado(objetivo);
