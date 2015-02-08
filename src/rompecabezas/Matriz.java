@@ -21,7 +21,7 @@ public class Matriz {
 						return nueva;
 						
 					} catch (ArrayIndexOutOfBoundsException e){
-						System.out.println("la operacion no es posible, se sale de la matriz");
+						//System.out.println("la operacion no es posible, se sale de la matriz");
 						nueva = null;
 					}
 				}
@@ -48,7 +48,7 @@ public class Matriz {
 						return nueva;
 						
 					} catch (ArrayIndexOutOfBoundsException e){
-						System.out.println("la operacion no es posible, se sale de la matriz");
+						//System.out.println("la operacion no es posible, se sale de la matriz");
 						nueva = null;
 					}
 				}
@@ -75,7 +75,7 @@ public class Matriz {
 						return nueva;
 						
 					} catch (ArrayIndexOutOfBoundsException e){
-						System.out.println("la operacion no es posible, se sale de la matriz");
+						//System.out.println("la operacion no es posible, se sale de la matriz");
 						nueva = null;
 					}
 				}
@@ -102,7 +102,7 @@ public class Matriz {
 						return nueva;
 						
 					} catch (ArrayIndexOutOfBoundsException e){
-						System.out.println("la operacion no es posible, se sale de la matriz");
+						//System.out.println("la operacion no es posible, se sale de la matriz");
 						nueva = null;
 					}
 				}

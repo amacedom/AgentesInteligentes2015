@@ -26,20 +26,20 @@ public class Generador {
 				Estado nuevoEnlace = generarEnlace(actual,movimiento);
 				
 				if(nuevoEnlace == null) { // no podemos movernos con este operador, cambiemos de operador haciendo un pop()
-					System.out.println("ya no podemos movernos hacia " + movimiento);
+					//System.out.println("ya no podemos movernos hacia " + movimiento);
 				}
 				else { // si no es nulo, entonces es un estado valido, pero no sabemos si es repetido
-					System.out.println("se genero un estado valido");
+					//System.out.println("se genero un estado valido");
 					repetido = estadoRepetido(estados,nuevoEnlace);
 					if(!repetido) { // no esta repetido, por lo tanto lo agregamos a nuestra lista de estados
-						System.out.println("No esta repetido y se agregara a la lista de estados");
+						//System.out.println("No esta repetido y se agregara a la lista de estados");
 						actual.enlaces.put(movimiento, nuevoEnlace);
 						estados.add(nuevoEnlace);
 						nuevoEnlace.agregarNombre(contador);
 						contador++;
 					}
 					else { // como este estado esta repetido debemos terminar
-						System.out.println("el estado esta repetido");
+						//System.out.println("el estado esta repetido");
 					}		
 				}
 				vacio = transiciones.isEmpty();
@@ -59,22 +59,22 @@ public class Generador {
 		if(matriz) {
 			switch(movimiento) {
 				
-				case ARRIBA:	System.out.println("Nos movemos hacia arriba");
+				case ARRIBA:	//System.out.println("Nos movemos hacia arriba");
 								transicion = new Matriz().moverArriba((int[][])actual.info);
 									
 								break;
 				
-				case DERECHA:	System.out.println("Nos movemos hacia la derecha");
+				case DERECHA:	//System.out.println("Nos movemos hacia la derecha");
 								transicion = new Matriz().moverDerecha((int[][])actual.info);
 								
 								break;
 								
-				case ABAJO: 	System.out.println("Nos movemos hacia abajo");
+				case ABAJO: 	//System.out.println("Nos movemos hacia abajo");
 								transicion = new Matriz().moverAbajo((int[][])actual.info);
 								
 								break;
 								
-				case IZQUIERDA: System.out.println("Nos movemos hacia la izquierda");
+				case IZQUIERDA: //System.out.println("Nos movemos hacia la izquierda");
 								transicion = new Matriz().moverIzquierda((int[][])actual.info);
 								
 								break;
@@ -82,7 +82,7 @@ public class Generador {
 			}
 			
 			if(transicion == null) {
-				System.out.println("No pudimos generar ninguna transicion");
+				//System.out.println("No pudimos generar ninguna transicion");
 			}
 			else {
 				estadoNuevo = new Estado(transicion);

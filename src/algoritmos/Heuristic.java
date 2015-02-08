@@ -44,7 +44,8 @@ public class Heuristic implements SearchMethods {
 			//System.out.println("Estado padre => " + head.getNombre());
 			List<Integer> total_mov = new ArrayList<Integer>();
 			HashMap<Operador,Estado> enlaces = head.getEnlaces();
-			HashMap<Integer,Estado> opciones = new HashMap<Integer,Estado>();
+			HashMap<Integer,List<Estado>> opciones = new HashMap<Integer,List<Estado>>();
+			List<Estado> estados = new ArrayList<Estado>();
 			for(Map.Entry <Operador,Estado> entry : enlaces.entrySet()) { // tenemos que calcular todos los movimientos para llegar a la solucion desde esta parte
 				Estado hijo = entry.getValue();
 				int[][] solucion_actual = (int[][])hijo.getInfo();
@@ -56,13 +57,22 @@ public class Heuristic implements SearchMethods {
 				int movimientos = calcularMovimientos(matriz_obj,solucion_actual);
 				//System.out.println("\tdistancia total de " + hijo.getNombre() + " => "+ movimientos);
 				total_mov.add(movimientos);
-				opciones.put(movimientos, hijo);
+				if(!opciones.containsKey(movimientos)) {
+					estados.add(hijo);
+					opciones.put(movimientos, estados);
+				}
+				else {
+					estados.addAll(opciones.get(movimientos));
+					estados.add(hijo);
+					opciones.put(movimientos,estados);
+				}
+				
 			}
 			
 			if(!total_mov.isEmpty()) {
 				Collections.sort(total_mov);
 				//System.out.println(total_mov.get(0));
-				cola.add(opciones.get(total_mov.get(0)));
+				cola.addAll(opciones.get(total_mov.get(0)));
 			}
 			
 			int[][] matriz = (int[][])head.getInfo();
