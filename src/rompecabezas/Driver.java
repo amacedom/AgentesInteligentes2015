@@ -3,6 +3,7 @@ import java.util.List;
 
 import algoritmos.BFS;
 import algoritmos.DFS;
+import algoritmos.Heuristic;
 
 
 public class Driver {
@@ -67,6 +68,22 @@ public class Driver {
 		elapsedSeconds = tDelta / 1000.0;
 		
 		System.out.println("Termino busqueda en amplitud\nTiempo en segs: " + elapsedSeconds);
+		
+		System.out.println("\nbusqueda heuristica");
+		tStart = System.currentTimeMillis();
+		Heuristic bus3 = new Heuristic(estados);
+		existe = bus3.existeEstado(objetivo);
+		
+		if(existe)
+			System.out.println("El estado existe");
+		else
+			System.out.println("El estado no existe :(");
+		
+		tEnd = System.currentTimeMillis();
+		tDelta = tEnd - tStart;
+		elapsedSeconds = tDelta / 1000.0;
+		
+		System.out.println("Termino busqueda heuristica\nTiempo en segs: " + elapsedSeconds);
 	}
 
 }

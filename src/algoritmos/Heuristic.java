@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Queue;
 
 import rompecabezas.Estado;
+import rompecabezas.Matriz;
 import rompecabezas.Operador;
 
 public class Heuristic implements SearchMethods {
@@ -40,19 +41,29 @@ public class Heuristic implements SearchMethods {
 		
 		while(!cola_vacia) {
 			Estado head = cola.poll();
+			//System.out.println("Estado padre => " + head.getNombre());
 			List<Integer> total_mov = new ArrayList<Integer>();
 			HashMap<Operador,Estado> enlaces = head.getEnlaces();
 			HashMap<Integer,Estado> opciones = new HashMap<Integer,Estado>();
 			for(Map.Entry <Operador,Estado> entry : enlaces.entrySet()) { // tenemos que calcular todos los movimientos para llegar a la solucion desde esta parte
 				Estado hijo = entry.getValue();
 				int[][] solucion_actual = (int[][])hijo.getInfo();
+				/*System.out.println("actual:");
+				hijo.verMatriz();
+				System.out.println("solucion:");
+				Matriz m = new Matriz();
+				m.verMatriz(matriz_obj);*/
 				int movimientos = calcularMovimientos(matriz_obj,solucion_actual);
+				//System.out.println("\tdistancia total de " + hijo.getNombre() + " => "+ movimientos);
 				total_mov.add(movimientos);
 				opciones.put(movimientos, hijo);
 			}
 			
-			Collections.sort(total_mov);
-			//cola.add(entry.getValue());
+			if(!total_mov.isEmpty()) {
+				Collections.sort(total_mov);
+				//System.out.println(total_mov.get(0));
+				cola.add(opciones.get(total_mov.get(0)));
+			}
 			
 			int[][] matriz = (int[][])head.getInfo();
 			boolean iguales = Arrays.deepEquals(matriz, matriz_obj);
@@ -73,9 +84,18 @@ public class Heuristic implements SearchMethods {
 	}
 	
 	public int calcularMovimientos(int[][] solucion,int[][]actual) {
+		int filas = actual.length;
+		int colum = actual[0].length;
 		int movimientos = 0;
+		int casilla = 0;
 		
-		
+		for(int i = 0; i < filas; i++) {
+			for(int j = 0; j < colum; j++ ) {
+				casilla = manhattanDistance(solucion,actual,i,j);
+				//System.out.println("movimientos de casilla " + casilla);
+				movimientos += casilla;
+			}
+		}
 		
 		return movimientos;
 	}
@@ -87,17 +107,23 @@ public class Heuristic implements SearchMethods {
 		int filas = actual.length;
 		int colum = actual[0].length;
 		int goal = actual[fila][col];
-
+		int casilla_actual = -1;
 		for(i = 0 ; i < filas; i++) {
 			for(j = 0 ; j < colum; j++) {
-				int casilla_actual = solucion[i][j];
-				if(casilla_actual == goal)
+				casilla_actual = solucion[i][j];
+				if(casilla_actual == goal) {
 					break;
+				}
 			}
-			System.out.println("sigo en el ciclo");
+			if(casilla_actual == goal) {
+				break;
+			}
+			
  		}
 		
-		distancia = Math.abs((i - fila)) + Math.abs((j - col));
+		int operacion1 = (i - fila);
+		int operacion2 = (j - col);
+		distancia = Math.abs(operacion1) + Math.abs(operacion2);
 		
 		return distancia;
 	}

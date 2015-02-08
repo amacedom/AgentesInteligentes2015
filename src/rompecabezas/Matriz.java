@@ -1,5 +1,7 @@
 package rompecabezas;
 
+import java.util.Arrays;
+
 public class Matriz {
 
 	public int[][] moverArriba (int[][]actual) {
@@ -122,4 +124,15 @@ public class Matriz {
 		
 		return destino;
 	}
+	
+	// this method prints any matrix size without returning an index out of bound exception 
+		public void verMatriz( int[][]info) {
+			if(info instanceof int[][]) {
+				String matrix = Arrays.deepToString((Object[]) info);
+				String [] fmtd_matrix = matrix.split("],");
+				for(String s: fmtd_matrix) {
+					System.out.println(s);
+				}
+			}
+		}
 }
