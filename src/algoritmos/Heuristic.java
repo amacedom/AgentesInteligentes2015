@@ -2,6 +2,7 @@ package algoritmos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,10 +40,20 @@ public class Heuristic implements SearchMethods {
 		
 		while(!cola_vacia) {
 			Estado head = cola.poll();
+			List<Integer> total_mov = new ArrayList<Integer>();
 			HashMap<Operador,Estado> enlaces = head.getEnlaces();
-			for(Map.Entry <Operador,Estado> entry : enlaces.entrySet()) { //tenemos que agregar todos los estados a este nivel del arbol directamente a la cola
-				cola.add(entry.getValue());
+			HashMap<Integer,Estado> opciones = new HashMap<Integer,Estado>();
+			for(Map.Entry <Operador,Estado> entry : enlaces.entrySet()) { // tenemos que calcular todos los movimientos para llegar a la solucion desde esta parte
+				Estado hijo = entry.getValue();
+				int[][] solucion_actual = (int[][])hijo.getInfo();
+				int movimientos = calcularMovimientos(matriz_obj,solucion_actual);
+				total_mov.add(movimientos);
+				opciones.put(movimientos, hijo);
 			}
+			
+			Collections.sort(total_mov);
+			//cola.add(entry.getValue());
+			
 			int[][] matriz = (int[][])head.getInfo();
 			boolean iguales = Arrays.deepEquals(matriz, matriz_obj);
 			if(iguales) { //si encontro el estado deseado
@@ -57,8 +68,16 @@ public class Heuristic implements SearchMethods {
 			cola_vacia = cola.isEmpty();
 		}
 		
+
 		return false;
-		return false;
+	}
+	
+	public int calcularMovimientos(int[][] solucion,int[][]actual) {
+		int movimientos = 0;
+		
+		
+		
+		return movimientos;
 	}
 	
 	/*Manhattan Distance*/
