@@ -1,11 +1,13 @@
 package rompecabezas;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 
-public class Generador {
+public class Generador extends Driver {
 	
 	//Este metodo recibe el mestado inicial y al terminar regresa una lista de estados
 	public List<Estado> crearEstados(Estado actual) {
@@ -18,29 +20,77 @@ public class Generador {
 			// tenemos que inicializar todas nuestras posibles transiciones en el estado actual
 			Stack<Operador> transiciones = initStack();
 			boolean vacio = transiciones.isEmpty();
-			boolean repetido;
+			boolean repetido = false;
 			actual = estados.get(index);// el estado con el que vamos a trabajar esta en la posicion index de la lista
+			
+			if(estados.size() > 10000)
+				numHilos = 9;
+			else
+				numHilos = 1;
 			
 			while(!vacio) { // mientras tengamos transiciones en el estado actual, generar estados con la transaccion actual
 				Operador movimiento = transiciones.pop();
 				Estado nuevoEnlace = generarEnlace(actual,movimiento);
+				HILOS = new HashMap<String,Integer>();
+				System.out.println("probamos hacia -> " + movimiento);
 				
 				if(nuevoEnlace == null) { // no podemos movernos con este operador, cambiemos de operador haciendo un pop()
 					//System.out.println("ya no podemos movernos hacia " + movimiento);
 				}
 				else { // si no es nulo, entonces es un estado valido, pero no sabemos si es repetido
 					//System.out.println("se genero un estado valido");
-					repetido = estadoRepetido(estados,nuevoEnlace);
+					int min,max;
+					int start = 0;
+					List<Thread> threads = new ArrayList<Thread>();
+					for(int hilo = 0 ; hilo < numHilos; hilo++) {
+						min = start;
+						if(hilo == (numHilos-1)) {
+							max = estados.size()-1;
+						}
+						else {
+							max = start + (estados.size()/numHilos)  ;
+						}
+						
+						Thread t = new Thread(new ParallelSearch(hilo,nuevoEnlace, estados, min, max));
+						start = max+1;
+						threads.add(t);
+						t.start();
+					}
+					
+					for(int i = 0; i < threads.size(); i++){
+						try {
+							threads.get(i).join();
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					//System.out.println("termino treads");
+					for(Map.Entry <String,Integer> o: HILOS.entrySet()) {
+						System.out.print("Con: " + o.getKey() +  ", existe? ->  " + o.getValue());
+						if(o.getValue() == 1){
+							System.out.println(" Si!");
+							repetido = true;
+						}
+						else
+							System.out.println();
+					}
+					
+					//repetido = estadoRepetido(estados,nuevoEnlace);
 					if(!repetido) { // no esta repetido, por lo tanto lo agregamos a nuestra lista de estados
 						//System.out.println("No esta repetido y se agregara a la lista de estados");
 						actual.enlaces.put(movimiento, nuevoEnlace);
 						estados.add(nuevoEnlace);
+						System.out.println("estado numero -> " + contador);
 						nuevoEnlace.agregarNombre(contador);
 						contador++;
 					}
 					else { // como este estado esta repetido debemos terminar
 						//System.out.println("el estado esta repetido");
+	
 					}		
+					
 				}
 				vacio = transiciones.isEmpty();
 			}
