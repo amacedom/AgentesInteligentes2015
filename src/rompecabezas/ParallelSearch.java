@@ -20,6 +20,9 @@ public class ParallelSearch extends Driver implements Runnable {
 	}
 	
 	public void run() {
+		//System.out.println("Hilo -> " + this.nombreHilo + " corriendo");
+		//Regresa un estado; el mísmo si es un estado nuevo y el estado original si no es nuevo.
+		//System.out.println("de " + this.min + " a " + this.max);
 		estadoRepetido();
 		//go();
 	}

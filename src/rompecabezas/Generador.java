@@ -23,8 +23,8 @@ public class Generador extends Driver {
 			boolean repetido = false;
 			actual = estados.get(index);// el estado con el que vamos a trabajar esta en la posicion index de la lista
 			
-			if(estados.size() > 10000)
-				numHilos = 9;
+			if(estados.size() > 21160)
+				numHilos = 6;
 			else
 				numHilos = 1;
 			
@@ -32,7 +32,8 @@ public class Generador extends Driver {
 				Operador movimiento = transiciones.pop();
 				Estado nuevoEnlace = generarEnlace(actual,movimiento);
 				HILOS = new HashMap<String,Integer>();
-				System.out.println("probamos hacia -> " + movimiento);
+				//System.out.println("probamos hacia -> " + movimiento);
+				//System.out.println("estados tiene size -> " + estados.size());
 				
 				if(nuevoEnlace == null) { // no podemos movernos con este operador, cambiemos de operador haciendo un pop()
 					//System.out.println("ya no podemos movernos hacia " + movimiento);
@@ -68,13 +69,17 @@ public class Generador extends Driver {
 					
 					//System.out.println("termino treads");
 					for(Map.Entry <String,Integer> o: HILOS.entrySet()) {
-						System.out.print("Con: " + o.getKey() +  ", existe? ->  " + o.getValue());
+						//System.out.print("Con: " + o.getKey() +  ", existe? ->  " + o.getValue());
 						if(o.getValue() == 1){
-							System.out.println(" Si!");
+							//System.out.println(" Si!");
 							repetido = true;
+							break;
 						}
-						else
-							System.out.println();
+						else {
+							repetido = false;
+							//System.out.println();
+						}
+							
 					}
 					
 					//repetido = estadoRepetido(estados,nuevoEnlace);
